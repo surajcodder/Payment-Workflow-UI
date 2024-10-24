@@ -1,0 +1,92 @@
+_schema-version: "3.2"
+ID: WorkflowForPayment
+version: 0.0.1
+modules:
+- name: WorkflowForPayment-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: WorkflowForPayment-destination-service
+    parameters:
+      content-target: true
+  - name: WorkflowForPayment_html_repo_host
+    parameters:
+      service-key:
+        name: WorkflowForPayment_html_repo_host-key
+  - name: uaa_WorkflowForPayment
+    parameters:
+      service-key:
+        name: uaa_WorkflowForPayment-key
+  parameters:
+    content:
+      subaccount:
+        destinations:
+        - Name: PaymentWorkflow_WorkflowForPayment_html_repo_host
+          ServiceInstanceName: WorkflowForPayment-html5-app-host-service
+          ServiceKeyName: WorkflowForPayment_html_repo_host-key
+          sap.cloud.service: PaymentWorkflow
+        - Authentication: OAuth2UserTokenExchange
+          Name: PaymentWorkflow_uaa_WorkflowForPayment
+          ServiceInstanceName: WorkflowForPayment-xsuaa-service
+          ServiceKeyName: uaa_WorkflowForPayment-key
+          sap.cloud.service: PaymentWorkflow
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: WorkflowForPayment-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: WorkflowForPayment_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - PaymentWorkflowworkflowuiPayment.zip
+      name: PaymentWorkflowworkflowuiPayment
+      target-path: resources/
+- name: PaymentWorkflowworkflowuiPayment
+  type: html5
+  path: workflow-ui-Payment
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: WorkflowForPayment-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        subaccount:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: WorkflowForPayment-destination-service
+    service-plan: lite
+- name: WorkflowForPayment_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: WorkflowForPayment-html5-app-host-service
+    service-plan: app-host
+- name: uaa_WorkflowForPayment
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: WorkflowForPayment-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo

@@ -1,0 +1,351 @@
+<mvc:View
+    xmlns:upload="sap.m.upload"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:suite="sap.suite.ui.commons"
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:m="sap.m"
+    controllerName="PaymentWorkflow.workflowuiPayment.controller.App"
+    displayBlock="true"
+>
+    <m:App id="app13">
+        <ObjectPageLayout id="object13">
+            <!-- Object Page Header -->
+            <headerTitle>
+                <ObjectPageHeader
+                    id="headerForTest1"
+                    objectTitle="{context>/PAYMENTID}"
+                />
+            </headerTitle>
+
+            <!-- Object Page Sections -->
+            <sections>
+                <!-- General Information Section -->
+                <ObjectPageSection
+                    id="generalInformationSection"
+                    title="General Information"
+                    titleUppercase="false"
+                >
+                    <subSections>
+                        <ObjectPageSubSection
+                            id="generalInformationSubSection"
+                            titleUppercase="false"
+                        >
+                            <form:SimpleForm
+                                id="general-information-form"
+                                layout="ColumnLayout"
+                                columnsM="2"
+                                columnsL="3"
+                                columnsXL="4"
+                            >
+                                <form:content>
+                                    <m:Label
+                                        id="companyName-label"
+                                        text="Company Name"
+                                    />
+                                    <m:Text
+                                        id="companyName-text"
+                                        text="{context>/companyName}"
+                                    />
+
+                                    <m:Label
+                                        id="contactPerson-label"
+                                        text="Contact Person"
+                                    />
+                                    <m:Text
+                                        id="contactPerson-text"
+                                        text="{context>/contactPerson}"
+                                    />
+
+                                    <m:Label
+                                        id="contactNumber-label"
+                                        text="Contact Number"
+                                    />
+                                    <m:Text
+                                        id="contactNumber-text"
+                                        text="{context>/contactNumber}"
+                                    />
+
+                                    <m:Label
+                                        id="email-label"
+                                        text="Email"
+                                    />
+                                    <m:Text
+                                        id="email-text"
+                                        text="{context>/email}"
+                                    />
+
+                                    <m:Label
+                                        id="van-label"
+                                        text="VAN"
+                                    />
+                                    <m:Text
+                                        id="van-text"
+                                        text="{context>/VAN}"
+                                    />
+
+                                    <m:Label
+                                        id="address-label"
+                                        text="Address"
+                                    />
+                                    <m:Text
+                                        id="address-text"
+                                        text="{context>/address}"
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </ObjectPageSubSection>
+                    </subSections>
+                </ObjectPageSection>
+
+                <!-- Payment Information Section -->
+                <ObjectPageSection
+                    id="paymentInformationSection"
+                    title="Payment Information"
+                    titleUppercase="false"
+                >
+                    <subSections>
+                        <ObjectPageSubSection
+                            id="paymentInformationSubSection"
+                            title="Payment Information"
+                            titleUppercase="false"
+                        >
+                            <form:SimpleForm
+                                id="payment-information-form"
+                                layout="ColumnLayout"
+                                columnsM="2"
+                                columnsL="3"
+                                columnsXL="4"
+                            >
+                                <form:content>
+                                    <!-- Payment ID Field -->
+                                    <m:Label
+                                        id="paymentID-label"
+                                        text="Payment ID"
+                                    />
+                                    <m:Text
+                                        id="paymentID-text"
+                                        text="{context>/PAYMENTID}"
+                                    />
+
+                                    <!-- Transaction ID Field -->
+                                    <m:Label
+                                        id="transactionID-label"
+                                        text="Transaction ID"
+                                    />
+                                    <m:Text
+                                        id="transactionID-text"
+                                        text="{context>/TRANSACTIONID}"
+                                    />
+
+                                    <!-- Account Number Field -->
+                                    <m:Label
+                                        id="accountNo-label"
+                                        text="Account Number"
+                                    />
+                                    <m:Text
+                                        id="accountNo-text"
+                                        text="{context>/ACCOUNTNO}"
+                                    />
+
+                                    <!-- Amount Field -->
+                                    <m:Label
+                                        id="amount-label"
+                                        text="Amount"
+                                    />
+                                    <m:Text
+                                        id="amount-text"
+                                        text="{context>/AMOUNT}"
+                                    />
+
+                                    <!-- Payment Method Field -->
+                                    <m:Label
+                                        id="paymentMethod-label"
+                                        text="Payment Method"
+                                    />
+                                    <m:Text
+                                        id="paymentMethod-text"
+                                        text="{context>/PAYMENTMETHOD}"
+                                    />
+
+                                    <!-- Status Field -->
+                                    <m:Label
+                                        id="status-label"
+                                        text="Status"
+                                    />
+                                    <m:Text
+                                        id="status-text"
+                                        text="{context>/STATUS}"
+                                    />
+
+                                    <!-- SOID (Sales Order ID) Field -->
+                                    <m:Label
+                                        id="soid-label"
+                                        text="SOID"
+                                    />
+                                    <m:Text
+                                        id="soid-text"
+                                        text="{context>/SOID}"
+                                    />
+                                </form:content>
+                            </form:SimpleForm>
+                        </ObjectPageSubSection>
+                    </subSections>
+                </ObjectPageSection>
+
+                <!-- Attachment Section -->
+                <ObjectPageSection
+                    id="attachmentsSection1"
+                    title="Attachments"
+                    titleUppercase="false"
+                >
+                    <subSections>
+                        <ObjectPageSubSection
+                            id="attachmentsSubSection1"
+                            title="Attachments"
+                            titleUppercase="false"
+                        >
+                            <upload:UploadSet
+                                id="uploadSet1"
+                                uploadEnabled="false"
+                                items="{myFile>/pdf}"
+                            >
+                                <upload:items>
+                                    <upload:UploadSetItem
+                                        id="uploadSetItem1"
+                                        fileName="{myFile>fileName}"
+                                        mediaType="{myFile>mediaType}"
+                                        url="{myFile>url}"
+                                        enabledEdit="false"
+                                        enabledRemove="false"
+                                        visibleEdit="false"
+                                        visibleRemove="false"
+                                        openPressed="onOpenPressed"
+                                    >
+                                        <upload:attributes>
+                                            <m:ObjectAttribute
+                                                id="uploadedBy-attribute1"
+                                                title="Uploaded By"
+                                                text="{myFile>createdBy}"
+                                            />
+                                            <m:ObjectAttribute
+                                                id="uploadedOn-attribute1"
+                                                title="Uploaded on"
+                                                text="{myFile>createdAt}"
+                                            />
+                                            <m:ObjectAttribute
+                                                id="fileSize-attribute1"
+                                                title="File Size"
+                                                text="{myFile>size}"
+                                            />
+                                        </upload:attributes>
+                                    </upload:UploadSetItem>
+                                </upload:items>
+                            </upload:UploadSet>
+                        </ObjectPageSubSection>
+                    </subSections>
+                </ObjectPageSection>
+
+                <!-- Comment Section with History Button -->
+                <ObjectPageSection
+                    id="commentSection"
+                    titleUppercase="false"
+                >
+                    <subSections>
+                        <ObjectPageSubSection
+                            id="_IDGenObjectPageSubSection5"
+                            titleUppercase="false"
+                        >
+                            <m:VBox
+                                id="_IDGenVBox2"
+                                width="100%"
+                            >
+                                <m:Toolbar id="_IDGenToolbar">
+                                    <m:Title
+                                        id="_IDGenTitle1"
+                                        text="Comment"
+                                    />
+                                    <m:ToolbarSpacer
+                                        id="_IDGenToolbarSpacer1"
+                                    />
+                                    <m:Button
+                                        id="_IDGenButton1"
+                                        text="Browse History"
+                                        press="onBrowseHistoryPress"
+                                    />
+                                </m:Toolbar>
+                                <m:TextArea
+                                    id="_IDGenTextArea"
+                                    showExceededText="true"
+                                    maxLength="1000"
+                                    width="100%"
+                                    height="120px"
+                                    value="{context>/Comment}"
+                                />
+                            </m:VBox>
+                        </ObjectPageSubSection>
+                    </subSections>
+                </ObjectPageSection>
+            </sections>
+        </ObjectPageLayout>
+    </m:App>
+
+    <m:Dialog
+        id="commentHistoryDialog"
+        title="Comment History"
+        stretch="false"
+        contentWidth="50%"
+        contentHeight="400px"
+    >
+        <m:customHeader>
+            <m:Toolbar id="_IDGenToolbar1">
+                <m:Title
+                    id="_IDGenTitle"
+                    text="Comment History"
+                />
+                <m:ToolbarSpacer id="_IDGenToolbarSpacer" />
+                <m:Button
+                    id="_IDGenButton"
+                    text="Close"
+                    press="onCloseHistoryDialog"
+                />
+            </m:Toolbar>
+        </m:customHeader>
+
+        <m:VBox id="_IDGenVBox">
+            <!-- Toolbar with filters -->
+            <!-- <m:OverflowToolbar id="_IDGenOverflowToolbar">
+            <m:Label id="_IDGenLabel15" text="Filter by Type"/>
+            <m:Select id="filterByTypeSelect" change="onFilterTypeChange">
+                <core:Item id="_IDGenItem" key="None" text="None"/>
+                <core:Item id="_IDGenItem1" key="Day" text="Day"/>
+                <core:Item id="_IDGenItem2" key="Month" text="Month"/>
+            </m:Select>
+        </m:OverflowToolbar> -->
+
+            <!-- Timeline for Comment History -->
+            <suite:Timeline
+                id="_IDGenTimeline"
+                enableDoubleSided="true"
+                groupBy="Day"
+                sortOldestFirst="true"
+                content="{commentModel>/Comment}"
+                showSearch="false"
+                showSort="false"
+                showHeaderBar="false"
+            >
+                <suite:content>
+                    <suite:TimelineItem
+                        id="_IDGenTimelineItem"
+                        dateTime="{commentModel>createdAt}"
+                        title="{commentModel>createdBy}"
+                        text="{commentModel>commentText}"
+                    />
+                </suite:content>
+            </suite:Timeline>
+        </m:VBox>
+    </m:Dialog>
+</mvc:View>
